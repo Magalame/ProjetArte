@@ -14,6 +14,16 @@ LINE=$(echo $ligne2 | tr ' ' '\n' | grep -A 2 "src" | head -n 1  | cut -d '"' -f
 
 test_curl=`curl -Is "$LINE" | head -1 | cut -f 2 -d " "` #test si le player est accessible
 
+choix=""
+
+while [ "$choix" != "fr" ] && [ "$choix" != "de" ]
+do
+    #echo "Entrez 'fr' pour télécharger la version française ou 'de' pour la version allemande:"
+    read -p "Entrez 'fr' pour télécharger la version française ou 'de' pour la version allemande:" choix
+done
+
+
+
 if [ "$test_curl" = "200" ];then
 	#echo "---------------------------------------------------"
 	#echo "Line:" $LINE
@@ -22,8 +32,20 @@ if [ "$test_curl" = "200" ];then
 	echo "Url api enc:" $url_enc
 	echo "---------------------------------------------------"
 	url_dec=$(printf "${url_enc//%/\\x}")	#enlève l'encodage html
+	
+	if [ "$choix" = "fr" ];then
+	    #echo "Français choisi"
+        url_dec=$(echo "$url_dec" | python -c "import sys; tmp = sys.stdin.readline().split('/'); tmp[7] = 'fr';print '/'.join(tmp)")
+	fi
+	
+	if [ "$choix" = "de" ];then
+	    #echo "Allemand choisi"
+        url_dec=$(echo "$url_dec" | python -c "import sys; tmp = sys.stdin.readline().split('/'); tmp[7] = 'de';print '/'.join(tmp)")
+	fi 
+	
 	echo "Url api dec:" $url_dec
 	wget -q -O api_page $url_dec #télécharge l'api
+	
 else
     echo "Probleme avec l'url, fin du programme"
 	exit
@@ -31,15 +53,21 @@ fi
 
 
 #cat api_page | grep -w -A 7 "HTTP_MP4_SQ_1" | sed 's/"/\n/g' | sed 's/[\]//g' > fichier_frag_2
-cat api_page | grep -w -A 7 "HTTPS_SQ_1" | sed 's/"/\n/g' | sed 's/[\]//g' > fichier_frag_2 
+cat api_page | grep -w -A 7 "HTTPS_SQ_1" | sed 's/"/\n/g' | sed 's/[\]//g' > fichier_frag_2 # télécharge la version française 
 
-title=$(echo -en "$(cat api_page | grep "VTI" | cut -d '"' -f 4)")
-subtitle=$(echo -en "$(cat api_page | grep "subtitle" | cut -d '"' -f 4)")
+title1=$(echo -en "$(cat api_page | grep "VTI" | cut -d '"' -f 4 | tr -d ':' | tr -d '?')")
+title0=$(echo -en "$(cat api_page | grep "subtitle" | cut -d '"' -f 4 | tr -d ':' | tr -d '?')")
 
-echo "---------------------------------------------------"
-echo "Nom du programme:" $title
-echo "---------------------------------------------------"
-echo "Nom du podcast:" $subtitle
+if [ -z "$subtitle" ]; then
+    echo "---------------------------------------------------"
+    echo "Nom du programme:" $title0
+    echo "---------------------------------------------------"
+    echo "Nom du podcast:" $title1
+else 
+    echo "---------------------------------------------------"
+    echo "Nom du podcast:" $title0
+fi
+
 
 
 cat fichier_frag_2 | while read LINE
@@ -72,10 +100,11 @@ url_var=${url_frag[0]}
 
 echo "url var:" $url_var
 
+echo "test:$title .mp4"
 
 if [ -z "$subtitle" ]; then
-    wget -nv -O "$title .mp4" $url_var
+    wget -O "$title0 - $title1 .mp4" $url_var
 else 
-    wget -nv -O "$title - $subtitle .mp4" $url_var
+    wget -O "$title1 .mp4" $url_var
 fi
 
