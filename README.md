@@ -1,6 +1,6 @@
 # ProjetArte
 
-Téléchargez le script [ici](https://drive.google.com/file/d/1pP4-4yxXe_U0-Wo9RrHeJSLjbOxtTWKQ/view?usp=sharing)
+Téléchargez le script en zip [ici](https://drive.google.com/file/d/1pP4-4yxXe_U0-Wo9RrHeJSLjbOxtTWKQ/view?usp=sharing), ou en tar [là](https://drive.google.com/file/d/1wW41UAqC4HQET5T9lWa7bz1JR7XMFUOg/view?usp=sharing)
 
 Premièrement, rendez vous sur la page de l'émission que vous voulez télécharger, par exemple, [ici](https://www.arte.tv/fr/videos/041378-000-A/le-deuxieme-souffle/), [ici](https://www.arte.tv/fr/videos/046969-000-A/sleepy-hollow/) ou [là](https://www.arte.tv/fr/videos/067093-040-A/tu-mourras-moins-bete/).
 Notez que la vidéo ne doit PAS être dans une playlist. Ensuite copiez l'url de la page, et exécutez: 
