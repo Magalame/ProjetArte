@@ -23,6 +23,7 @@ choix=""
 while [ "$choix" != "fr" ] && [ "$choix" != "de" ]
 do
     #echo "Entrez 'fr' pour télécharger la version française ou 'de' pour la version allemande:"
+	echo "---------------------------------------------------"
     read -p "Entrez 'fr' pour télécharger la version française ou 'de' pour la version allemande:" choix
 done
 
@@ -31,9 +32,9 @@ done
 if [ "$test_curl" = "200" ];then
 	#echo "---------------------------------------------------"
 	#echo "Line:" $LINE
-	echo "---------------------------------------------------"
+	#echo "---------------------------------------------------"
 	url_enc=$(echo "$LINE" | cut -f 2 -d "=") #récupère uniquement l'adresse de l'api
-	echo "Url api enc:" $url_enc
+	#echo "Url api enc:" $url_enc
 	echo "---------------------------------------------------"
 	url_dec=$(printf "${url_enc//%/\\x}")	#enlève l'encodage html
 	
@@ -47,9 +48,9 @@ if [ "$test_curl" = "200" ];then
         url_dec=$(echo "$url_dec" | python -c "import sys; tmp = sys.stdin.readline().split('/'); tmp[7] = 'de';print '/'.join(tmp)")
 	fi 
 	
-	echo "Url api dec:" $url_dec
-	wget -q -O api_page $url_dec #télécharge l'api
-	
+	echo "Url du fichier de configuration de l'api:" $url_dec
+	wget --header="Accept: text/html" --user-agent="Mozilla/5.0 (Macintosh; Intel Mac OS X 10.8; rv:21.0) Gecko/20100101 Firefox/21.0" -q -O api_page $url_dec #télécharge l'api
+  
 else
     echo "Probleme avec l'url, fin du programme"
 	exit
@@ -57,12 +58,12 @@ fi
 
 
 #cat api_page | grep -w -A 7 "HTTP_MP4_SQ_1" | sed 's/"/\n/g' | sed 's/[\]//g' > fichier_frag_2
-cat api_page | grep -w -A 7 "HTTPS_SQ_1" | sed 's/"/\n/g' | sed 's/[\]//g' > fichier_frag_2 # télécharge la version française 
+cat api_page | grep -w -A 7 "HTTPS_SQ_1" | sed 's/"/\n/g' | sed 's/[\]//g' > fichier_frag_2 # télécharge la version en meilleure qualité 
 
 title1=$(echo -en "$(cat api_page | grep "VTI" | cut -d '"' -f 4 | tr -d ':' | tr -d '?')")
 title0=$(echo -en "$(cat api_page | grep "subtitle" | cut -d '"' -f 4 | tr -d ':' | tr -d '?')")
 
-if [ -z "$subtitle" ]; then
+if [ ! -z "$subtitle" ]; then
     echo "---------------------------------------------------"
     echo "Nom du programme:" $title0
     echo "---------------------------------------------------"
@@ -106,7 +107,7 @@ echo "url var:" $url_var
 
 #echo "test:$title .mp4"
 
-if [ -z "$subtitle" ]; then
+if [ ! -z "$subtitle" ]; then
     wget -O "$title0 - $title1 .mp4" $url_var
 	mv "$title0 - $title1 .mp4" "$currentdir"
 else 
