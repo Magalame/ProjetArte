@@ -1,5 +1,7 @@
 #!/bin/bash
 
+currentdir=$(pwd)
+
 cd /tmp
 
 if [ ! -d "work" ]; then
@@ -102,11 +104,13 @@ url_var=${url_frag[0]}
 
 echo "url var:" $url_var
 
-echo "test:$title .mp4"
+#echo "test:$title .mp4"
 
 if [ -z "$subtitle" ]; then
     wget -O "$title0 - $title1 .mp4" $url_var
+	mv "$title0 - $title1 .mp4" "$currentdir"
 else 
     wget -O "$title1 .mp4" $url_var
+	mv "$title1 .mp4" "$currentdir"
 fi
 
