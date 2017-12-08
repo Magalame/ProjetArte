@@ -54,15 +54,18 @@ if [ "$test_curl" = "200" ];then
 	elif [ "$choix" = "5" ];then
 	    langue='pl'
 	fi
+		
+	url_page_langue=$(echo "$1" | python -c "import sys; tmp = sys.stdin.readline().split('/'); tmp[3] = '$langue';print '/'.join(tmp)") #we replace the url with the language tag chosen
 	
-    url_dec=$(echo "$url_dec" | python -c "import sys; tmp = sys.stdin.readline().split('/'); tmp[7] = '$langue';print '/'.join(tmp)")
-	
-	test_langue=`curl -Is "$url_dec" | head -1 | cut -f 2 -d " "`
+	test_langue=`curl -Is "$url_page_langue" | head -1 | cut -f 2 -d " "` 
 	
 	if [ ! "$test_langue" = "200" ];then
 	    echo "La langue demandée ne semble pas disponible, fin du programme"
+		exit
 	fi
-	
+
+    url_dec=$(echo "$url_dec" | python -c "import sys; tmp = sys.stdin.readline().split('/'); tmp[7] = '$langue';print '/'.join(tmp)") #remplace le language tag dans l'adresse de l'api
+
 	echo "Url du fichier de configuration de l'api:" $url_dec
 	wget --header="Accept: text/html" --user-agent="Mozilla/5.0 (Macintosh; Intel Mac OS X 10.8; rv:21.0) Gecko/20100101 Firefox/21.0" -q -O api_page $url_dec #télécharge l'api
   
@@ -129,7 +132,7 @@ echo
 cd "$currentdir"
 
 if [ ! -z "$title1" ]; then
-    wget -O "$title0 - $title1 [Arte].mp4" $url_var
+    wget -O "$title0 - $title1 [Arte $langue].mp4" $url_var
 else 
-    wget -O "$title0 [Arte].mp4" $url_var
+    wget -O "$title0 [Arte $langue].mp4" $url_var
 fi
