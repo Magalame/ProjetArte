@@ -1,9 +1,8 @@
 # ProjetArte
 
 * Téléchargement
-Téléchargez le script en zip [ici](https://drive.google.com/file/d/1pP4-4yxXe_U0-Wo9RrHeJSLjbOxtTWKQ/view?usp=sharing), ou en tar [là](https://drive.google.com/file/d/1wW41UAqC4HQET5T9lWa7bz1JR7XMFUOg/view?usp=sharing)
 
-Ou plus simplement, dans le terminal:
+Tapez dans le terminal:
 
 `wget https://raw.githubusercontent.com/Magalame/ProjetArte/master/capt.sh`
 
