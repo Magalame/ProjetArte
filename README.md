@@ -21,7 +21,7 @@ Premièrement, rendez vous sur la page de l'émission que vous voulez téléchar
 
 Ensuite copiez l'url de la page, et exécutez: 
 
-*Notez qu'il faut aussi que l'url commence par `https` ou `http`: le programme analyse l'url et présume (pour l'instant) qu'elle commence par "https" ou "http".*
+*Notez qu'il faut aussi que l'url commence par `https` ou `http`: le programme analyse l'url et présume (pour l'instant) qu'elle commence par "https://" ou "http://".*
 
 `./capt.sh url`
 
