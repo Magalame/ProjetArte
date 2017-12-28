@@ -45,14 +45,19 @@ if [ "$test_curl" = "200" ];then
 	
 	if [ "$choix" = "1" ];then
         langue='fr'
+		langue_complete='francais'
 	elif [ "$choix" = "2" ];then
 	    langue='de'
+		langue_complete='allemand'
 	elif [ "$choix" = "3" ];then
 	    langue='es'
+		langue_complete='espagnol'
 	elif [ "$choix" = "4" ];then
 	    langue='en'
+		langue_complete='anglais'
 	elif [ "$choix" = "5" ];then
 	    langue='pl'
+		langue_complete='polonais'
 	fi
 		
 	url_page_langue=$(echo "$1" | python -c "import sys; tmp = sys.stdin.readline().split('/'); tmp[3] = '$langue';print '/'.join(tmp)") #we replace the url with the language tag chosen
@@ -130,9 +135,11 @@ echo
 echo
 #echo "test:$title .mp4"
 cd "$currentdir"
-
+echo "---------------------------------------------------"
 if [ ! -z "$title1" ]; then
-    wget -O "$title0 - $title1 [Arte $langue].mp4" $url_var
+    wget -O "$title0 - $title1 [Arte $langue_complete].mp4" $url_var
+	echo "Nom du fichier:$title0 - $title1 [Arte $langue_complete].mp4"
 else 
-    wget -O "$title0 [Arte $langue].mp4" $url_var
+    wget -O "$title0 [Arte $langue_complete].mp4" $url_var
+	echo "Nom du fichier:$title0 [Arte $langue_complete].mp4"
 fi
