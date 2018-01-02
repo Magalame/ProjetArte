@@ -18,8 +18,8 @@ Ensuite il faut le rendre exécutable:
 
 ### Utilisation basique
 
-Premièrement, rendez vous sur la page de l'émission que vous voulez télécharger, par exemple, [ici](https://www.arte.tv/fr/videos/041378-000-A/le-deuxieme-souffle/), [ici](https://www.arte.tv/fr/videos/046969-000-A/sleepy-hollow/) ou [là](https://www.arte.tv/fr/videos/067093-040-A/tu-mourras-moins-bete/).
-*Notez que la vidéo ne doit PAS être dans une playlist.*
+Premièrement, rendez vous sur la page de l'émission que vous voulez télécharger, par exemple, [ici](https://www.arte.tv/fr/videos/069098-000-A/zika-enquete-sur-une-epidemie/), [ici](https://www.arte.tv/fr/videos/064380-000-A/plutot-mourir-que-mourir/) ou [là](https://www.arte.tv/fr/videos/067093-040-A/tu-mourras-moins-bete/).
+*Notez que l'url ne doit PAS venir d'une playlist. Si vous voulez télécharger une vidéo inclue dans une playlist il faut d'abord que vous trouvier la page propre à la vidéo. Par exemple, ce lien [là](https://www.arte.tv/fr/videos/RC-015569/les-films-incontournables-du-mois-de-janvier/) ne fonctionnera pas, mais [celui-ci](https://www.arte.tv/fr/videos/077814-046-A/le-cid-d-anthony-mann-un-regard-une-minute/) oui.*
 
 Ensuite copiez l'url de la page, et exécutez: 
 
@@ -63,7 +63,7 @@ Then make it executable:
 
 ## Use
 
-Spot the page of the podcast you want to download, and copy the url. For example [here](https://www.arte.tv/fr/videos/041378-000-A/le-deuxieme-souffle/), [here](https://www.arte.tv/fr/videos/046969-000-A/sleepy-hollow/) or [there](https://www.arte.tv/fr/videos/067093-040-A/tu-mourras-moins-bete/).*Note it won't work if you pick a url from a playlist. The program, for parsing purposes, also assumes the url starts with 'http(s)://'*
+Spot the page of the podcast you want to download, and copy the url. For example [here](https://www.arte.tv/fr/videos/069098-000-A/zika-enquete-sur-une-epidemie/), [here](https://www.arte.tv/fr/videos/064380-000-A/plutot-mourir-que-mourir/) or [there](https://www.arte.tv/fr/videos/067093-040-A/tu-mourras-moins-bete/).*Note it won't work if you pick a url from a playlist, for example [this link](https://www.arte.tv/fr/videos/RC-015569/les-films-incontournables-du-mois-de-janvier/) won't work, but [that one](https://www.arte.tv/fr/videos/077814-046-A/le-cid-d-anthony-mann-un-regard-une-minute/) will. The program, for parsing purposes, also assumes the url starts with 'http(s)://'*
 
 Then type
 
