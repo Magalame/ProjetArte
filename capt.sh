@@ -18,8 +18,6 @@ done
 
 currentdir=$(pwd)
 
-cd /tmp
-
 if [ ! -d "work" ]; then
   mkdir work
 fi
@@ -81,10 +79,10 @@ fi
 
 
 #cat api_page | grep -w -A 7 "HTTP_MP4_SQ_1" | sed 's/"/\n/g' | sed 's/[\]//g' > fichier_frag_2
-cat api_page | grep -w -A 7 "HTTPS_SQ_1" | sed 's/"/\n/g' | sed 's/[\]//g' > fichier_frag_2 # télécharge la version en meilleure qualité 
+cat api_page | sed 's/,/\n/g' | grep -w -A 7 "HTTPS_SQ_1" | sed 's/"/\n/g' | sed 's/[\]//g' > fichier_frag_2 # télécharge la version en meilleure qualité 
 
-title0=$(echo -en "$(cat api_page | grep "VTI" | cut -d '"' -f 4 | tr -d ':' | tr -d '?')") #le VTI est toujours présent dans le code
-title1=$(echo -en "$(cat api_page | grep "subtitle" | cut -d '"' -f 4 | tr -d ':' | tr -d '?')") #mais pas toujours le subtitle
+title0=$(echo -en "$(cat api_page | sed 's/,/\n/g' | grep "VTI" | cut -d '"' -f 4 | tr -d ':' | tr -d '?')") #le VTI est toujours présent dans le code
+title1=$(echo -en "$(cat api_page | sed 's/,/\n/g' | grep "subtitle" | cut -d '"' -f 4 | tr -d ':' | tr -d '?')") #mais pas toujours le subtitle
 
 if [ ! -z "$title1" ]; then #si $title1 n'est pas vide, alors on l'utilise
     echo "---------------------------------------------------"
